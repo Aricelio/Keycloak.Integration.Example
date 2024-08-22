@@ -5,7 +5,6 @@ using Keycloak.AuthServices.Sdk.Admin;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 // Keycloak authentication
@@ -25,12 +24,12 @@ var clientOptions = builder
 builder.Services.AddKeycloakAuthorization(clientOptions);
 
 // Keycloak admin client
-var adminOption = builder
+var adminOptions = builder
     .Configuration
     .GetSection(KeycloakAdminClientOptions.Section)
     .Get<KeycloakAdminClientOptions>();
 
-builder.Services.AddKeycloakAdminHttpClient(adminOption);
+builder.Services.AddKeycloakAdminHttpClient(adminOptions);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
