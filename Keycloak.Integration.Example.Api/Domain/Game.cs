@@ -17,8 +17,8 @@ namespace Keycloak.Integration.Example.Api.Domain
         /// <summary>The game genre</summary>
         public string Genre { get; set; }
 
-        /// <summary>The game platform</summary>
-        public string Platform { get; set; }
+        /// <summary>The list of game platforms</summary>
+        public List<Platform> Platforms { get; set; }
 
         /// <summary>The game publisher</summary>
         public string Publisher { get; set; }
