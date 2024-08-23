@@ -13,8 +13,8 @@ This is a example of a .NET Api that integrates with a local keycloak service.
   - Come back to the client, in the scopes tab, add the scope to the client;
   - Create a new user and set for him a new password;
  
-#### Testing:
-- Create a new .NET Api project;
+#### Configure the application:
+- Create a simple .NET Api project;
   - Install the dependencies below:
     - KeyCloak.AuthServices.Authentication
     - KeyCloak.AuthServices.Authorization
@@ -39,7 +39,20 @@ This is a example of a .NET Api that integrates with a local keycloak service.
 - In Program Class, set the dependency injection for the keycloak;
 - In Controller class, add the 'Authorize' tag;
 
-    
+#### Testing:
+- On some http request app (e.g., Postman, Insomnia, Thunderclient, etc ):
+  - Make the request to the keycloak, requesting a authentication token like in the example bellow:
+	```
+	curl --location 'http://localhost:8080/realms/<your-realm>/protocol/openid-connect/token' \
+	--header 'Content-Type: application/x-www-form-urlencoded' \
+	--data-urlencode 'grant_type=password' \
+	--data-urlencode 'client_id=<your-client-api>' \
+	--data-urlencode 'username=<your-username>' \
+	--data-urlencode 'password=<your-password>' \
+	--data-urlencode 'client_secret=<your-secret>'
+	```
+  - Save the generated token and use it how a bearer token to authenticate in the example project created;
+      
 ## **Portuguese**
 Esse é um exemplo de uma api .NET que se integra com um serviço local do keycloak.
 
@@ -55,14 +68,14 @@ Esse é um exemplo de uma api .NET que se integra com um serviço local do keycl
   - Dentro do client, na aba de escopos, adicionar o escopo ao client;
   - Criar um usuário e setar uma senha para ele;
 
-#### Testando:
-  - Criar projeto .NET
+#### Configurando a aplicação:
+- Criar projeto .NET
     - Instalar dependencias:
 	    - KeyCloak.AuthServices.Authentication
 	    - KeyCloak.AuthServices.Authorization
 	    - IdentityModel.AspNetCore
 	    - Refit.HttpClientFactory
-   - No arquivo appsettings, adicionar uma chave com os dados do client, exemplo:
+- No arquivo appsettings, adicionar uma chave com os dados do client, exemplo:
      ```
           "Keycloak": {
           {
@@ -78,5 +91,21 @@ Esse é um exemplo de uma api .NET que se integra com um serviço local do keycl
           }
         }
      ```
-   - Na classe Program, configure a injeção de dependencia para o KeyCloak;
-   - Na classe controller, adicione a tag 'Authorize';
+- Na classe Program, configure a injeção de dependencia para o KeyCloak;
+- Na classe controller, adicione a tag 'Authorize';
+
+#### Testando
+- Em um aplicativo para requisições http (Postman, Insomnia, Thunderclient, etc):
+  - Faça uma requisição para o keycloak, solicitando um token de autenticação como no exemplo abaixo:
+	```
+	curl --location 'http://localhost:8080/realms/<your-realm>/protocol/openid-connect/token' \
+	--header 'Content-Type: application/x-www-form-urlencoded' \
+	--data-urlencode 'grant_type=password' \
+	--data-urlencode 'client_id=<your-client-api>' \
+	--data-urlencode 'username=<your-username>' \
+	--data-urlencode 'password=<your-password>' \
+	--data-urlencode 'client_secret=<your-secret>'
+	```
+  - Salve o token gerado e o use para como um token bearer para se autenticar na api criada no projeto.
+  
+
